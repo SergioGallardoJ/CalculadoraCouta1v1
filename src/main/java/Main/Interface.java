@@ -87,14 +87,26 @@ public class Interface {
 		
 		JPanel Jpanel_Premios = new JPanel();
 		Jpanel_Premios.setVisible(false);
-		Jpanel_Premios.setBounds(0, 263, 838, 399);
+		Jpanel_Premios.setBounds(0, 272, 838, 472);
 		frame.getContentPane().add(Jpanel_Premios);
 		Jpanel_Premios.setLayout(null);
 		
 		JTextArea txtArea_Ganadores = new JTextArea();
 		txtArea_Ganadores.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
-		txtArea_Ganadores.setBounds(52, 33, 696, 342);
+		txtArea_Ganadores.setBounds(78, 83, 674, 318);
 		Jpanel_Premios.add(txtArea_Ganadores);
+		
+		JLabel lblGanadores = new JLabel("Ganadores:");
+		lblGanadores.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGanadores.setFont(new Font("Impact", Font.PLAIN, 25));
+		lblGanadores.setBounds(254, 22, 315, 50);
+		Jpanel_Premios.add(lblGanadores);
+		
+		JButton btn_reiniciar = new JButton("Reiniciar");
+		
+		btn_reiniciar.setEnabled(false);
+		btn_reiniciar.setBounds(319, 412, 180, 39);
+		Jpanel_Premios.add(btn_reiniciar);
 		
 		ganadoresListModel = new DefaultListModel<>();
 	
@@ -154,7 +166,7 @@ public class Interface {
 		frame.getContentPane().add(lblNewLabel_2_1);
 		
 		txt_Cuota1 = new JTextField();
-		txt_Cuota1.setText("1.0");
+		txt_Cuota1.setText("0.9");
 		txt_Cuota1.setEditable(false);
 		txt_Cuota1.setFont(new Font("Tahoma", Font.BOLD, 17));
 		txt_Cuota1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -163,7 +175,7 @@ public class Interface {
 		txt_Cuota1.setColumns(10);
 		
 		txt_Couta2 = new JTextField();
-		txt_Couta2.setText("1.0");
+		txt_Couta2.setText("0.9");
 		txt_Couta2.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_Couta2.setFont(new Font("Tahoma", Font.BOLD, 17));
 		txt_Couta2.setEditable(false);
@@ -303,6 +315,20 @@ public class Interface {
 		btn_verPremios.setBounds(611, 661, 200, 50);
 		frame.getContentPane().add(btn_verPremios);
 		
+		JLabel lbl_Ganador1 = new JLabel("¡GANADOR!");
+		lbl_Ganador1.setVisible(false);
+		lbl_Ganador1.setFont(new Font("Jokerman", Font.BOLD, 21));
+		lbl_Ganador1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_Ganador1.setBounds(224, 143, 168, 39);
+		frame.getContentPane().add(lbl_Ganador1);
+		
+		JLabel lbl_Ganador2 = new JLabel("¡GANADOR!");
+		lbl_Ganador2.setVisible(false);
+		lbl_Ganador2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_Ganador2.setFont(new Font("Jokerman", Font.BOLD, 21));
+		lbl_Ganador2.setBounds(397, 143, 168, 39);
+		frame.getContentPane().add(lbl_Ganador2);
+		
 		btn_OK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -316,6 +342,9 @@ public class Interface {
 					
 					rb_peleador1.setText(lbl_NombrePeleador1.getText());
 					rb_peleador2.setText(lbl_NombrePeleador2.getText());
+					
+					rb_ganador1.setText(lbl_NombrePeleador1.getText());
+					rb_ganador2.setText(lbl_NombrePeleador2.getText());
 					
 					btn_CerrarApuestas.setEnabled(true);
 					btn_OK.setEnabled(false);
@@ -398,6 +427,7 @@ public class Interface {
 				
 				rb_ganador1.setEnabled(true);
 				rb_ganador2.setEnabled(true);
+				btn_verPremios.setVisible(true);
 				btn_verPremios.setEnabled(true);
 				btn_CerrarApuestas.setEnabled(false);
 			}
@@ -435,7 +465,7 @@ public class Interface {
 					
 					mensaje.append(apuesta[0]).append(": ").append(df.format(premioIndividual)).append("\n");
 					
-					//if (apuesta[2] ==)
+				
 					txtArea_Ganadores.setText(mensaje.toString());
 					txtArea_Ganadores.setEditable(false);
 					
@@ -446,11 +476,53 @@ public class Interface {
 				btn_CerrarApuestas.setEnabled(false);
 				rb_ganador1.setEnabled(false);
 				rb_ganador2.setEnabled(false);
+				btn_reiniciar.setEnabled(true);
+				
+				if (rb_ganador1.isSelected()) {
+					lbl_Ganador1.setVisible(true);
+					lbl_Ganador2.setVisible(false);
+					
+				} else if (rb_ganador2.isSelected()) {
+					lbl_Ganador2.setVisible(true);
+					lbl_Ganador1.setVisible(false);
+				}
+				btn_verPremios.setEnabled(false);
+				btn_verPremios.setVisible(false);
+			}
+		});
+		
+		btn_reiniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txt_peleador1.setText(null);
+				txt_peleador1.setEnabled(true);
+				txt_peleador1.setEditable(true);
+				txt_peleador2.setText(null);
+				txt_peleador2.setEnabled(true);
+				txt_peleador2.setEditable(true);
+				lbl_NombrePeleador1.setText(null);
+				lbl_NombrePeleador2.setText(null);
+				txt_ApuestaTotal1.setText("0");
+				txt_ApuestaTotal2.setText("0");
+				
+				cuotaLuchador1 = 0;
+				cuotaLuchador2 = 0;
+				dineroApostado = 0;
+				dineroDescontado = 0;
+				dineroLuchador1 = 0;
+				dineroLuchador2 = 0;
+				
+				txt_Cuota1.setText("0.9");
+				txt_Couta2.setText("0.9");
+				
+				Jpanel_Premios.setVisible(false);
+				btn_NuevoApostador.setEnabled(false);
+				btn_ConfirmarApuesta.setEnabled(false);
+				apuestas.clear();
+				btn_OK.setEnabled(true);
 				
 				
 			}
 		});
-		
 		
 	}
 	public static double calcularCuota(double dineroApostado, double dineroRival, double cuotaMaxima, double cuotaMinima) {

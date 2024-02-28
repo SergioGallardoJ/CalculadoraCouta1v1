@@ -3,8 +3,36 @@
   <groupId>calculadoraCuotasRP</groupId>
   <artifactId>Apuestas_GTA_RP</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
-  <build>
+  <packaging>jar</packaging>
+   <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.4.2.Final</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+ <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -13,13 +41,13 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>interfaz.MainWindow</mainClass>
+                            <mainClass>Main.Interface</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>examen</finalName>
+                    <finalName>executable</finalName>
                 </configuration>
                 <executions>
                     <execution>
@@ -33,5 +61,4 @@
             </plugin>
         </plugins>
     </build>
-    
 </project>
