@@ -22,6 +22,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import java.awt.TextArea;
+import javax.swing.JToolBar;
 
 public class Interface {
 
@@ -44,7 +45,7 @@ public class Interface {
 	double dineroLuchador2 = 0;
 	List<String[]> apuestas = new ArrayList<>();
 	double cuotaMax = 2.8;
-	double cuotaMin = 0.9;
+	double cuotaMin = 1.00;
 	boolean cerrarApuestas = false;
 	double dineroApostado = 0;
 	double dineroDescontado = 0;
@@ -55,6 +56,10 @@ public class Interface {
 	double premio;
 	DefaultListModel<String> ganadoresListModel;
 	DecimalFormat df = new DecimalFormat("#.##");
+	private JTextField txt_dineroGenerado10;
+	private JTextField txt_dineroGanadoApuestasCasa;
+	private JTextField txt_Napuestas1;
+	private JTextField txt_Napuestas2;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -81,25 +86,26 @@ public class Interface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 854, 783);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel Jpanel_Premios = new JPanel();
 		Jpanel_Premios.setVisible(false);
-		Jpanel_Premios.setBounds(0, 272, 838, 472);
+		Jpanel_Premios.setBounds(0, 287, 838, 457);
 		frame.getContentPane().add(Jpanel_Premios);
 		Jpanel_Premios.setLayout(null);
 		
 		JTextArea txtArea_Ganadores = new JTextArea();
 		txtArea_Ganadores.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
-		txtArea_Ganadores.setBounds(78, 83, 674, 318);
+		txtArea_Ganadores.setBounds(30, 72, 324, 287);
 		Jpanel_Premios.add(txtArea_Ganadores);
 		
-		JLabel lblGanadores = new JLabel("Ganadores:");
+		JLabel lblGanadores = new JLabel("Apuestas:");
 		lblGanadores.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGanadores.setFont(new Font("Impact", Font.PLAIN, 25));
-		lblGanadores.setBounds(254, 22, 315, 50);
+		lblGanadores.setBounds(30, 11, 324, 50);
 		Jpanel_Premios.add(lblGanadores);
 		
 		JButton btn_reiniciar = new JButton("Reiniciar");
@@ -107,6 +113,60 @@ public class Interface {
 		btn_reiniciar.setEnabled(false);
 		btn_reiniciar.setBounds(319, 412, 180, 39);
 		Jpanel_Premios.add(btn_reiniciar);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setOrientation(SwingConstants.VERTICAL);
+		separator_3.setBounds(389, 0, 33, 380);
+		Jpanel_Premios.add(separator_3);
+		
+		JSeparator separator_1_1 = new JSeparator();
+		separator_1_1.setBounds(0, 379, 838, 15);
+		Jpanel_Premios.add(separator_1_1);
+		
+		JLabel lblDineroGeneradoPor = new JLabel("Dinero Generado por el 10% :");
+		lblDineroGeneradoPor.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDineroGeneradoPor.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
+		lblDineroGeneradoPor.setBounds(402, 45, 295, 50);
+		Jpanel_Premios.add(lblDineroGeneradoPor);
+		
+		txt_dineroGenerado10 = new JTextField();
+		txt_dineroGenerado10.setText("0.0");
+		txt_dineroGenerado10.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_dineroGenerado10.setFont(new Font("Tahoma", Font.BOLD, 17));
+		txt_dineroGenerado10.setEditable(false);
+		txt_dineroGenerado10.setColumns(10);
+		txt_dineroGenerado10.setBounds(707, 55, 86, 33);
+		Jpanel_Premios.add(txt_dineroGenerado10);
+		
+		JLabel lblNewLabel_2_2_1_1 = new JLabel("$");
+		lblNewLabel_2_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_2_2_1_1.setBounds(803, 45, 25, 50);
+		Jpanel_Premios.add(lblNewLabel_2_2_1_1);
+		
+		JLabel lblDineroDeApostadores = new JLabel("Dinero ganado de apuestas :");
+		lblDineroDeApostadores.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDineroDeApostadores.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
+		lblDineroDeApostadores.setBounds(402, 122, 295, 50);
+		Jpanel_Premios.add(lblDineroDeApostadores);
+		
+		txt_dineroGanadoApuestasCasa = new JTextField();
+		txt_dineroGanadoApuestasCasa.setText("0.0");
+		txt_dineroGanadoApuestasCasa.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_dineroGanadoApuestasCasa.setFont(new Font("Tahoma", Font.BOLD, 17));
+		txt_dineroGanadoApuestasCasa.setEditable(false);
+		txt_dineroGanadoApuestasCasa.setColumns(10);
+		txt_dineroGanadoApuestasCasa.setBounds(707, 132, 86, 33);
+		Jpanel_Premios.add(txt_dineroGanadoApuestasCasa);
+		
+		JLabel lblNewLabel_2_2_1_1_1 = new JLabel("$");
+		lblNewLabel_2_2_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_2_2_1_1_1.setBounds(803, 122, 25, 50);
+		Jpanel_Premios.add(lblNewLabel_2_2_1_1_1);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("(De los que perdieron)");
+		lblNewLabel_4_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4_1.setBounds(516, 166, 143, 21);
+		Jpanel_Premios.add(lblNewLabel_4_1);
 		
 		ganadoresListModel = new DefaultListModel<>();
 	
@@ -180,7 +240,7 @@ public class Interface {
 		txt_Couta2.setFont(new Font("Tahoma", Font.BOLD, 17));
 		txt_Couta2.setEditable(false);
 		txt_Couta2.setColumns(10);
-		txt_Couta2.setBounds(633, 239, 86, 33);
+		txt_Couta2.setBounds(633, 236, 86, 33);
 		frame.getContentPane().add(txt_Couta2);
 		
 		JButton btn_NuevoApostador = new JButton("Nuevo Apostador");
@@ -253,9 +313,9 @@ public class Interface {
 		txt_ApuestaTotal1.setBounds(146, 101, 86, 33);
 		frame.getContentPane().add(txt_ApuestaTotal1);
 		
-		JLabel lblNewLabel_4 = new JLabel("(Dinero total apostado a cada luchador)");
+		JLabel lblNewLabel_4 = new JLabel("<- (Dinero total apostado a cada luchador, menos el 10%) ->");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setBounds(269, 95, 266, 50);
+		lblNewLabel_4.setBounds(235, 95, 337, 50);
 		frame.getContentPane().add(lblNewLabel_4);
 		
 		JLabel lbl_NombrePeleador1 = new JLabel("");
@@ -319,15 +379,39 @@ public class Interface {
 		lbl_Ganador1.setVisible(false);
 		lbl_Ganador1.setFont(new Font("Jokerman", Font.BOLD, 21));
 		lbl_Ganador1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_Ganador1.setBounds(224, 143, 168, 39);
+		lbl_Ganador1.setBounds(235, 143, 157, 39);
 		frame.getContentPane().add(lbl_Ganador1);
 		
 		JLabel lbl_Ganador2 = new JLabel("¡GANADOR!");
 		lbl_Ganador2.setVisible(false);
 		lbl_Ganador2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_Ganador2.setFont(new Font("Jokerman", Font.BOLD, 21));
-		lbl_Ganador2.setBounds(397, 143, 168, 39);
+		lbl_Ganador2.setBounds(408, 143, 157, 39);
 		frame.getContentPane().add(lbl_Ganador2);
+		
+		JLabel lblNewLabel_5 = new JLabel("Nº Apuestas:");
+		lblNewLabel_5.setFont(new Font("Rockwell Condensed", Font.BOLD, 15));
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setBounds(253, 215, 108, 33);
+		frame.getContentPane().add(lblNewLabel_5);
+		
+		txt_Napuestas1 = new JTextField();
+		txt_Napuestas1.setEditable(false);
+		txt_Napuestas1.setBounds(277, 249, 55, 27);
+		frame.getContentPane().add(txt_Napuestas1);
+		txt_Napuestas1.setColumns(10);
+		
+		JLabel lblNewLabel_5_1 = new JLabel("Nº Apuestas:");
+		lblNewLabel_5_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5_1.setFont(new Font("Rockwell Condensed", Font.BOLD, 15));
+		lblNewLabel_5_1.setBounds(431, 215, 108, 33);
+		frame.getContentPane().add(lblNewLabel_5_1);
+		
+		txt_Napuestas2 = new JTextField();
+		txt_Napuestas2.setEditable(false);
+		txt_Napuestas2.setColumns(10);
+		txt_Napuestas2.setBounds(455, 249, 55, 27);
+		frame.getContentPane().add(txt_Napuestas2);
 		
 		btn_OK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -519,7 +603,9 @@ public class Interface {
 				btn_ConfirmarApuesta.setEnabled(false);
 				apuestas.clear();
 				btn_OK.setEnabled(true);
-				
+			
+				lbl_Ganador1.setVisible(false);
+				lbl_Ganador2.setVisible(false);
 				
 			}
 		});
