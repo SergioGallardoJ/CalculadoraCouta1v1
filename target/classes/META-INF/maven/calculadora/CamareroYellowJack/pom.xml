@@ -20,7 +20,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Main.MainInterfaz</mainClass>
+                            <mainClass>Main.MainInterface</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
